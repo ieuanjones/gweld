@@ -34,14 +34,23 @@ class Bar(Chart):
 
         for i, item in enumerate(vis.data):
             height = (item / vis.data.max) * plot_height
+            centre_x = plot_x[0] + i * width_per_bar + width_per_bar/2
 
             add_tag(tree, 'rect', attributes={
                 'width': str(bar_width),
                 'height': str(height),
-                'x': str(plot_x[0] + i * width_per_bar + (1-vis.style.bar_width) * width_per_bar),
+                'x': str(centre_x - bar_width/2),
                 'y': str(plot_y[0] + plot_height - height),
                 'class': 'data_colour'
             })
+
+            if vis.style.show_labels == 'all' or (vis.style.show_labels == 'limits' and
+                    (item == vis.data.max or item == vis.data.min)):
+                add_tag(tree, 'text', attributes={
+                    'x': str(centre_x),
+                    'y': str(plot_y[0] + plot_height - height - vis.style.label_font_size/2),
+                    'class': 'label'
+                }, text=str(item))
 
 
         # Axes

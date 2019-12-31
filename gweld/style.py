@@ -4,7 +4,10 @@ class Style:
         self.height = height
         self.bar_width = 0.5
         self.data_colour = '#f00'
-        self.axis_font_size = 16
+        self.axis_font_size = 24
+        self.label_font_size = 16
+
+        self.show_labels = 'none'
 
         # L U R D
         self.margin = (0.05, 0.1, 0.05, 0.1)
@@ -20,5 +23,10 @@ class Style:
         
         .scale {{
             text-anchor: end;
-            font-size: {self.axis_font_size};
+            font-size: {self.axis_font_size}px;
+        }}
+        
+        .label {{
+            text-anchor: middle;
+            font-size: {self.label_font_size}px;
         }}'''

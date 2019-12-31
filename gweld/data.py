@@ -14,3 +14,7 @@ class Data:
     @property
     def max(self):
         return max(self.data)
+
+    @property
+    def min(self):
+        return min(self.data)
