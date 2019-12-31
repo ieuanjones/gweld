@@ -1,6 +1,7 @@
 class Data:
-    def __init__(self, data):
+    def __init__(self, data, labels=[]):
         self.data = data
+        self.labels = labels
 
     def __repr__(self):
         return f'Data({self.data!r})'

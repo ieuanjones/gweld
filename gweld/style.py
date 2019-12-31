@@ -2,12 +2,13 @@ class Style:
     def __init__(self, width, height):
         self.width = width
         self.height = height
-        self.bar_width = 0.5
+        self.bar_width = 0.8
         self.data_colour = '#f00'
         self.axis_font_size = 24
+        self.value_font_size = 16
         self.label_font_size = 16
 
-        self.show_labels = 'none'
+        self.show_values = 'all'
 
         # L U R D
         self.margin = (0.05, 0.1, 0.05, 0.1)
@@ -23,10 +24,17 @@ class Style:
         
         .scale {{
             text-anchor: end;
+            dominant-baseline: middle;
             font-size: {self.axis_font_size}px;
         }}
         
-        .label {{
+        .value {{
             text-anchor: middle;
-            font-size: {self.label_font_size}px;
+            font-size: {self.value_font_size}px;
+        }}
+
+        .legend_label {{
+            text-anchor: middle;
+            dominant-baseline: hanging;
+            font-size: {self.value_font_size}px;
         }}'''

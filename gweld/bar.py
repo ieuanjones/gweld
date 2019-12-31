@@ -44,13 +44,20 @@ class Bar(Chart):
                 'class': 'data_colour'
             })
 
-            if vis.style.show_labels == 'all' or (vis.style.show_labels == 'limits' and
+            if vis.style.show_values == 'all' or (vis.style.show_values == 'limits' and
                     (item == vis.data.max or item == vis.data.min)):
                 add_tag(tree, 'text', attributes={
                     'x': str(centre_x),
-                    'y': str(plot_y[0] + plot_height - height - vis.style.label_font_size/2),
-                    'class': 'label'
+                    'y': str(plot_y[0] + plot_height - height - vis.style.value_font_size/2),
+                    'class': 'value'
                 }, text=str(item))
+
+            if vis.data.labels:
+                add_tag(tree, 'text', attributes={
+                    'x': str(centre_x),
+                    'y': str(plot_y[0] + plot_height + vis.style.label_font_size/2),
+                    'class': 'legend_label'
+                }, text=str(vis.data.labels[i]))
 
 
         # Axes
@@ -78,7 +85,7 @@ class Bar(Chart):
         for i, label in enumerate(y_scale):
             add_tag(tree, 'text', attributes={
                 'x': str(plot_x[0] - 5),
-                'y': str(plot_y[0] + plot_height - i * plot_height/(len(y_scale)-1) + vis.style.axis_font_size/3),
+                'y': str(plot_y[0] + plot_height - i * plot_height/(len(y_scale)-1)),
                 'class': 'scale'
             }, text=str(label))
 
