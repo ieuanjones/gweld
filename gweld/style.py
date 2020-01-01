@@ -6,8 +6,11 @@ class Style:
         self.height = height
         self.bar_width = 0.8
         self.data_colour = '#f00'
+        self.data_colours = ['#ed4334','#27ca42','#2546eb','#eadc45','#faab43']
+        self.background_colour = '#efefef'
         self.axis_font_size = 24
         self.x_axis_interval = 2 # Show every n items on the x axis
+        self.pie_inner_radius = 0.4 # Move out to separate function in future
 
         self.text_styles = {
             'x_axis': TextStyle('x_axis'),

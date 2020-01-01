@@ -1,5 +1,5 @@
 class Data:
-    def __init__(self, data, labels=[]):
+    def __init__(self, data=[], labels=[]):
         self.data = data
         self.labels = labels
 

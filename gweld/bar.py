@@ -3,16 +3,10 @@ from gweld import Chart
 import math
 
 class Bar(Chart):
-    def plot(self):
-        pass
-
-    def __repr__(self):
-        return 'Bar()'
-
     def plot(self, vis):
         tree = root_tag(vis.style.width, vis.style.height)
         add_tag(tree, 'style', text=vis.style.css)
-        add_tag(tree, 'rect', attributes={'x': '0', 'y': '0', 'width': str(vis.style.width), 'height': str(vis.style.height), 'fill': '#efefef'})
+        add_tag(tree, 'rect', attributes={'x': '0', 'y': '0', 'width': str(vis.style.width), 'height': str(vis.style.height), 'fill': vis.style.background_colour})
 
         # Left, Right
         plot_x = (

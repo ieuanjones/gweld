@@ -20,6 +20,7 @@ value_text.anchor = 'middle'
 
 # Make style
 test_style = Style(width=1200, height=700)
+test_style.bar_width = 0.9
 test_style.data_colour = '#a7a7a7'
 
 test_style += x_axis_text
@@ -29,11 +30,12 @@ test_style += value_text
 # Generate the data
 label_list = ('red','yellow','green','blue','black','white','grey','orange','pink','cyan','brown','purple','magenta')
 labels = [random.choice(label_list) for i in range(25)]
+max_size = random.randint(25,1000)
 
 # Generate the visualisation
 vis = Vis()
-vis += Data([(random.randint(0,250)+random.randint(0,250))//2 for i in range(25)], labels=labels[:25])
-vis += Bar()
+vis += Data([(random.randint(0,max_size)+random.randint(0,max_size))//2 for i in range(5)], labels=labels[:15])
+vis += Pie()
 vis += test_style
 
 #print(list(Bar()._calculate_y_scale(Data([.61]), 6)))
