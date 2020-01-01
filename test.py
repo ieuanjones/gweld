@@ -6,6 +6,7 @@ x_axis_text = TextStyle('x_axis')
 x_axis_text.size = 16
 x_axis_text.baseline = 'hanging'
 x_axis_text.anchor = 'middle'
+x_axis_text.base_offset = 8
 #x_axis_text.angle = 45 
 
 y_axis_text = TextStyle('y_axis')

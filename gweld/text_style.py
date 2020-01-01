@@ -7,6 +7,7 @@ class TextStyle:
         self._anchor = 'start'
         self.angle_anchor = 'start'
         self.baseline = 'bottom'
+        self.base_offset = 0
 
     @property
     def anchor(self):

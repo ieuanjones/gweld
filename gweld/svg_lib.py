@@ -11,7 +11,7 @@ def add_tag(parent, tag, attributes=None, text=None):
 def add_text(parent, pos, text, style):
     add_tag(parent, 'text', attributes={
         'x': str(pos[0]),
-        'y': str(pos[1]),
+        'y': str(pos[1] + style.base_offset),
         'transform': f'rotate({style.angle} {pos[0]} {pos[1]})',
         'class': f'{style.text_type}_label'
     }, text=text)
