@@ -28,12 +28,13 @@ class Bar(Chart):
         plot_width = vis.style.width - plot_x[0] - plot_x[1]
         plot_height = vis.style.height - plot_y[0] - plot_y[1]
 
+        y_scale = self._calculate_y_scale(vis.data, 6)
 
         width_per_bar = plot_width / len(vis.data)
         bar_width = width_per_bar * vis.style.bar_width
 
         for i, item in enumerate(vis.data):
-            height = (item / vis.data.max) * plot_height
+            height = (item / y_scale[-1]) * plot_height
             centre_x = plot_x[0] + i * width_per_bar + width_per_bar/2
 
             add_tag(tree, 'rect', attributes={
@@ -80,8 +81,6 @@ class Bar(Chart):
             'class': 'axis'
         })
         
-        y_scale = self._calculate_y_scale(vis.data, 6)
-
         for i, label in enumerate(y_scale):
             add_tag(tree, 'text', attributes={
                 'x': str(plot_x[0] - 5),

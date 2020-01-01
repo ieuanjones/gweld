@@ -7,9 +7,9 @@ class Style:
         self.axis_font_size = 24
         self.value_font_size = 16
         self.label_font_size = 16
-        self.label_angle = 0
+        self.label_angle = 45
 
-        self.show_values = 'all'
+        self.show_values = 'limits'
 
         # L U R D
         self.margin = (0.05, 0.1, 0.05, 0.1)
