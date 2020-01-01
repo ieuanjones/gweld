@@ -49,17 +49,17 @@ class Bar(Chart):
                     (item == vis.data.max or item == vis.data.min)):
                 add_tag(tree, 'text', attributes={
                     'x': str(centre_x),
-                    'y': str(plot_y[0] + plot_height - height - vis.style.value_font_size/2),
-                    'class': 'value'
+                    'y': str(plot_y[0] + plot_height - height - vis.style.text_styles["value"].size/2),
+                    'class': 'value_label'
                 }, text=str(item))
 
             if vis.data.labels:
-                label_y = plot_y[0] + plot_height + vis.style.label_font_size/2
+                label_y = plot_y[0] + plot_height + vis.style.text_styles["x_axis"].size/2
                 add_tag(tree, 'text', attributes={
                     'x': str(centre_x),
                     'y': str(label_y),
-                    'transform': f'rotate({vis.style.label_angle} {centre_x} {label_y})',
-                    'class': 'legend_label'
+                    'transform': f'rotate({vis.style.text_styles["x_axis"].angle} {centre_x} {label_y})',
+                    'class': 'x_axis_label'
                 }, text=str(vis.data.labels[i]))
 
 
@@ -85,7 +85,7 @@ class Bar(Chart):
             add_tag(tree, 'text', attributes={
                 'x': str(plot_x[0] - 5),
                 'y': str(plot_y[0] + plot_height - i * plot_height/(len(y_scale)-1)),
-                'class': 'scale'
+                'class': 'y_axis_label'
             }, text=str(label))
 
         return to_string(tree)

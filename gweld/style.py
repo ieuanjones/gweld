@@ -1,3 +1,5 @@
+from gweld import TextStyle
+
 class Style:
     def __init__(self, width, height):
         self.width = width
@@ -5,42 +7,43 @@ class Style:
         self.bar_width = 0.8
         self.data_colour = '#f00'
         self.axis_font_size = 24
-        self.value_font_size = 16
-        self.label_font_size = 16
-        self.label_angle = 45
 
+        self.text_styles = {
+            'x_axis': TextStyle('x_axis'),
+            'y_axis': TextStyle('y_axis'),
+            'value': TextStyle('value')
+        }
         self.show_values = 'limits'
 
         # L U R D
         self.margin = (0.05, 0.1, 0.05, 0.1)
 
-    def __repr__(self):
-        return f'Style({self.size!r})'
+    def __iadd__(self, other):
+        if isinstance(other, TextStyle):
+            if other.text_type:
+                self.text_styles[other.text_type] = other
+            else:
+                print(f'Invalid text_type: TextStyle({other.text_type})')
+                raise TypeError
+        else:
+            raise TypeError
+
+        return self
 
     @property
     def css(self):
-        return f'''.data_colour {{
+        css = f'''
+        .data_colour {{
             fill: {self.data_colour};
-        }}
-        
-        .scale {{
-            text-anchor: end;
-            dominant-baseline: middle;
-            font-size: {self.axis_font_size}px;
-        }}
-        
-        .value {{
-            text-anchor: middle;
-            font-size: {self.value_font_size}px;
-        }}
-
-        .legend_label {{
-            text-anchor: {'middle' if self.label_angle == 0 else 'left'};
-            dominant-baseline: hanging;
-            font-size: {self.value_font_size}px;
         }}
         
         .axis {{
             stroke: black;
             stroke-width: 2px;
-        }}'''
+        }}
+        '''
+
+        for text_type in self.text_styles:
+            css += self.text_styles[text_type].css
+
+        return css

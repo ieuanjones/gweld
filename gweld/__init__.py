@@ -1,4 +1,5 @@
 from gweld.data import Data
+from gweld.text_style import TextStyle
 from gweld.style import Style
 
 from gweld.chart import Chart
