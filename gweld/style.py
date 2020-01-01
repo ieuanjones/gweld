@@ -1,7 +1,7 @@
 from gweld import TextStyle
 
 class Style:
-    def __init__(self, width, height):
+    def __init__(self, width=640, height=480):
         self.width = width
         self.height = height
         self.bar_width = 0.8
@@ -10,7 +10,7 @@ class Style:
         self.background_colour = '#efefef'
         self.axis_font_size = 24
         self.x_axis_interval = 2 # Show every n items on the x axis
-        self.pie_inner_radius = 0.4 # Move out to separate function in future
+        self.pie_inner_radius = 0.5 # Move out to separate function in future
 
         self.text_styles = {
             'x_axis': TextStyle('x_axis'),

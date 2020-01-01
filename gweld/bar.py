@@ -8,6 +8,9 @@ class Bar(Chart):
         add_tag(tree, 'style', text=vis.style.css)
         add_tag(tree, 'rect', attributes={'x': '0', 'y': '0', 'width': str(vis.style.width), 'height': str(vis.style.height), 'fill': vis.style.background_colour})
 
+        if len(vis.data) == 0:
+            return to_string(tree)
+
         # Left, Right
         plot_x = (
             vis.style.width * vis.style.margin[0],

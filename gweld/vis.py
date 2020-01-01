@@ -1,7 +1,17 @@
-from gweld import Data, Chart, Style
+"""
+vis.py
+======
+
+Module containing the core visualisation object.
+"""
+
+from gweld import Data, Chart, Bar, Style
 
 class Vis:
-    def __init__(self, data=None, chart=None, style=None):
+    """
+    A visualisation object. The core object worked with to create visualisations.
+    """
+    def __init__(self, data=Data(), chart=Bar(), style=Style()):
         self.data = data
         self.chart = chart
         self.style = style
