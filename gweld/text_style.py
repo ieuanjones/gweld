@@ -5,11 +5,12 @@ class TextStyle:
         self.size = 12
         self.angle = 0
         self._anchor = 'start'
+        self.angle_anchor = 'start'
         self.baseline = 'bottom'
 
     @property
     def anchor(self):
-        return self._anchor if self.angle == 0 else 'start'
+        return self._anchor if self.angle == 0 else self.angle_anchor
 
     @anchor.setter
     def anchor(self, anchor):

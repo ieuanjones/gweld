@@ -1,4 +1,4 @@
-from gweld.svg_lib import root_tag, add_tag, to_string
+from gweld.svg_lib import root_tag, add_tag, add_text, to_string
 from gweld import Chart
 import math
 
@@ -47,21 +47,12 @@ class Bar(Chart):
 
             if vis.style.show_values == 'all' or (vis.style.show_values == 'limits' and
                     (item == vis.data.max or item == vis.data.min)):
-                add_tag(tree, 'text', attributes={
-                    'x': str(centre_x),
-                    'y': str(plot_y[0] + plot_height - height - vis.style.text_styles["value"].size/2),
-                    'class': 'value_label'
-                }, text=str(item))
+                label_y = plot_y[0] + plot_height - height - vis.style.text_styles["value"].size/2
+                add_text(tree, (centre_x, label_y), str(item), vis.style.text_styles['value'])
 
             if vis.data.labels:
                 label_y = plot_y[0] + plot_height + vis.style.text_styles["x_axis"].size/2
-                add_tag(tree, 'text', attributes={
-                    'x': str(centre_x),
-                    'y': str(label_y),
-                    'transform': f'rotate({vis.style.text_styles["x_axis"].angle} {centre_x} {label_y})',
-                    'class': 'x_axis_label'
-                }, text=str(vis.data.labels[i]))
-
+                add_text(tree, (centre_x, label_y), str(vis.data.labels[i]), vis.style.text_styles['x_axis'])
 
         # Axes
         
@@ -82,11 +73,8 @@ class Bar(Chart):
         })
         
         for i, label in enumerate(y_scale):
-            add_tag(tree, 'text', attributes={
-                'x': str(plot_x[0] - 5),
-                'y': str(plot_y[0] + plot_height - i * plot_height/(len(y_scale)-1)),
-                'class': 'y_axis_label'
-            }, text=str(label))
+            label_y = plot_y[0] + plot_height - i * plot_height/(len(y_scale)-1)
+            add_text(tree, (plot_x[0]-5, label_y), str(label), vis.style.text_styles['y_axis'])
 
         return to_string(tree)
 
@@ -98,7 +86,7 @@ class Bar(Chart):
         coarse_tick_size = data_range / (tick_count-1)
         magnitude = math.ceil(math.log(coarse_tick_size, 10)) # Yay floating point arithmetic!
 
-        for tick_size in [0.1, 0.125, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.7, 0.75, 0.8, 0.9, 1]:
+        for tick_size in [0.1, 0.125, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.7, 0.75, 0.8, 0.9, 1]:
             if coarse_tick_size/10**magnitude <= tick_size:
                 tick_size *= 10**magnitude
                 break

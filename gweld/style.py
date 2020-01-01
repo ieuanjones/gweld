@@ -13,7 +13,7 @@ class Style:
             'y_axis': TextStyle('y_axis'),
             'value': TextStyle('value')
         }
-        self.show_values = 'limits'
+        self.show_values = 'all'
 
         # L U R D
         self.margin = (0.05, 0.05, 0.05, 0.1)

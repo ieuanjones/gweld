@@ -10,11 +10,15 @@ x_axis_text.angle = 45
 y_axis_text = TextStyle('y_axis')
 y_axis_text.size = 24
 y_axis_text.baseline = 'middle'
-y_axis_text.anchor = 'end'
+y_axis_text.angle_anchor = 'end'
+y_axis_text.angle = 315
 
 value_text = TextStyle('value')
 value_text.size = 16
 value_text.anchor = 'middle'
+value_text.angle = 90
+value_text.angle_anchor = 'end'
+value_text.baseline = 'middle'
 
 test_style = Style(width=1200, height=700)
 test_style.data_colour = '#a7a7a7'
