@@ -53,9 +53,11 @@ class Bar(Chart):
                 }, text=str(item))
 
             if vis.data.labels:
+                label_y = plot_y[0] + plot_height + vis.style.label_font_size/2
                 add_tag(tree, 'text', attributes={
                     'x': str(centre_x),
-                    'y': str(plot_y[0] + plot_height + vis.style.label_font_size/2),
+                    'y': str(label_y),
+                    'transform': f'rotate({vis.style.label_angle} {centre_x} {label_y})',
                     'class': 'legend_label'
                 }, text=str(vis.data.labels[i]))
 
@@ -67,8 +69,7 @@ class Bar(Chart):
             'x2': str(plot_x[0]),
             'y1': str(plot_y[0] + plot_height),
             'y2': str(plot_y[0]),
-            'stroke': 'black',
-            'stroke-width': '2px'
+            'class': 'axis'
         })
         
         add_tag(tree, 'line', attributes={
@@ -76,8 +77,7 @@ class Bar(Chart):
             'x2': str(plot_x[0] + plot_width),
             'y1': str(plot_y[1] + plot_height),
             'y2': str(plot_y[1] + plot_height),
-            'stroke': 'black',
-            'stroke-width': '2px'
+            'class': 'axis'
         })
         
         y_scale = self._calculate_y_scale(vis.data, 6)

@@ -7,6 +7,7 @@ class Style:
         self.axis_font_size = 24
         self.value_font_size = 16
         self.label_font_size = 16
+        self.label_angle = 0
 
         self.show_values = 'all'
 
@@ -34,7 +35,12 @@ class Style:
         }}
 
         .legend_label {{
-            text-anchor: middle;
+            text-anchor: {'middle' if self.label_angle == 0 else 'left'};
             dominant-baseline: hanging;
             font-size: {self.value_font_size}px;
+        }}
+        
+        .axis {{
+            stroke: black;
+            stroke-width: 2px;
         }}'''
