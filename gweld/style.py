@@ -16,7 +16,7 @@ class Style:
         self.show_values = 'limits'
 
         # L U R D
-        self.margin = (0.05, 0.1, 0.05, 0.1)
+        self.margin = (0.05, 0.05, 0.05, 0.1)
 
     def __iadd__(self, other):
         if isinstance(other, TextStyle):

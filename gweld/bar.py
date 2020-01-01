@@ -76,8 +76,8 @@ class Bar(Chart):
         add_tag(tree, 'line', attributes={
             'x1': str(plot_x[0]),
             'x2': str(plot_x[0] + plot_width),
-            'y1': str(plot_y[1] + plot_height),
-            'y2': str(plot_y[1] + plot_height),
+            'y1': str(plot_y[0] + plot_height),
+            'y2': str(plot_y[0] + plot_height),
             'class': 'axis'
         })
         
