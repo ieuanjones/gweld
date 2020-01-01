@@ -51,8 +51,9 @@ class Bar(Chart):
                 add_text(tree, (centre_x, label_y), str(item), vis.style.text_styles['value'])
 
             if vis.data.labels:
-                label_y = plot_y[0] + plot_height + vis.style.text_styles["x_axis"].size/2
-                add_text(tree, (centre_x, label_y), str(vis.data.labels[i]), vis.style.text_styles['x_axis'])
+                if not i % vis.style.x_axis_interval:
+                    label_y = plot_y[0] + plot_height + vis.style.text_styles["x_axis"].size/2
+                    add_text(tree, (centre_x, label_y), str(vis.data.labels[i]), vis.style.text_styles['x_axis'])
 
         # Axes
         

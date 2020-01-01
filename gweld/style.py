@@ -7,13 +7,14 @@ class Style:
         self.bar_width = 0.8
         self.data_colour = '#f00'
         self.axis_font_size = 24
+        self.x_axis_interval = 2 # Show every n items on the x axis
 
         self.text_styles = {
             'x_axis': TextStyle('x_axis'),
             'y_axis': TextStyle('y_axis'),
             'value': TextStyle('value')
         }
-        self.show_values = 'all'
+        self.show_values = 'limits'
 
         # L U R D
         self.margin = (0.05, 0.05, 0.05, 0.1)
