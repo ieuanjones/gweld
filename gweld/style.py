@@ -1,4 +1,4 @@
-from gweld import TextStyle
+from gweld import TextStyle, CircleTextStyle
 
 class Style:
     def __init__(self, width=640, height=480):
@@ -11,11 +11,13 @@ class Style:
         self.axis_font_size = 24
         self.x_axis_interval = 2 # Show every n items on the x axis
         self.pie_inner_radius = 0.5 # Move out to separate function in future
+        self.pie_value_radius = 1.1 # Move out to separate function in future
 
         self.text_styles = {
             'x_axis': TextStyle('x_axis'),
             'y_axis': TextStyle('y_axis'),
-            'value': TextStyle('value')
+            'value': TextStyle('value'),
+            'circle_value': CircleTextStyle('circle_value')
         }
         self.show_values = 'limits'
 
@@ -36,7 +38,12 @@ class Style:
 
     @property
     def css(self):
-        css = f'''
+        css = ''
+
+        for text_type in self.text_styles:
+            css += self.text_styles[text_type].css
+
+        css += f'''
         .data_colour {{
             fill: {self.data_colour};
         }}
@@ -46,8 +53,5 @@ class Style:
             stroke-width: 2px;
         }}
         '''
-
-        for text_type in self.text_styles:
-            css += self.text_styles[text_type].css
 
         return css

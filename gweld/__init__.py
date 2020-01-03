@@ -1,5 +1,6 @@
 from gweld.data import Data
 from gweld.text_style import TextStyle
+from gweld.circle_text_style import CircleTextStyle
 from gweld.style import Style
 
 from gweld.chart import Chart

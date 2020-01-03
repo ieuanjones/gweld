@@ -31,6 +31,7 @@ class Pie(Chart):
         angles = self._calculate_angles(vis.data)
         centre = (plot_x[0] + plot_width/2, plot_y[0] + plot_height/2)
         radius = min(plot_width, plot_height)/2 * 0.9
+        value_radius = radius * vis.style.pie_value_radius
 
         # SVG paths can't draw full circle. Backtrack to a circle if we
         # get too close
@@ -57,6 +58,32 @@ class Pie(Chart):
                     'd': f'M{centre[0]},{centre[1]} L{old_x},{old_y} A{radius},{radius} 0 {big},1 {x},{y} Z',
                     'fill': vis.style.data_colours[i%len(vis.data)]
                 }, text=str((angles[i], angle)))
+
+            angle = 0
+            for i, item in enumerate(vis.data):
+                angle += angles[i] / 2
+                x = centre[0] + value_radius * math.sin(angle)
+                y = centre[1] + -(value_radius * math.cos(angle))
+
+                css_class = '_' 
+                if angle < math.pi/2 or angle > math.pi*6/4:
+                    css_class += 'upper'
+                else:
+                    css_class += 'lower'
+                if angle < math.pi:
+                    css_class += '_left'
+                else:
+                    css_class += '_right'
+
+                add_text(
+                    tree,
+                    (x,y),
+                    str(item),
+                    vis.style.text_styles['circle_value'],
+                    css_class
+                )
+
+                angle += angles[i] / 2
 
         add_tag(tree, 'circle', attributes={
             'cx': str(centre[0]),

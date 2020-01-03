@@ -14,9 +14,9 @@ y_axis_text.size = 24
 y_axis_text.baseline = 'middle'
 y_axis_text.anchor = 'end'
 
-value_text = TextStyle('value')
-value_text.size = 16
-value_text.anchor = 'middle'
+value_text = CircleTextStyle('circle_value')
+value_text.size = 32
+value_text.format = lambda x: f'{x}%'
 
 # Make style
 test_style = Style(width=1200, height=700)
