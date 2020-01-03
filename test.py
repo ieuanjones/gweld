@@ -16,7 +16,7 @@ y_axis_text.anchor = 'end'
 
 value_text = CircleTextStyle('circle_value')
 value_text.size = 32
-value_text.format = lambda x: f'{x}%'
+value_text.format = lambda x: f'{round(float(x), 2)}%'
 
 # Make style
 test_style = Style(width=1200, height=700)
@@ -32,9 +32,12 @@ label_list = ('red','yellow','green','blue','black','white','grey','orange','pin
 labels = [random.choice(label_list) for i in range(25)]
 max_size = random.randint(25,1000)
 
+data = [(random.randint(0,max_size)+random.randint(0,max_size))//2 for i in range(5)]
+data = [100 * i/sum(data) for i in data]
+
 # Generate the visualisation
 vis = Vis()
-vis += Data([(random.randint(0,max_size)+random.randint(0,max_size))//2 for i in range(5)], labels=labels[:15])
+vis += Data(data, labels=labels[:15])
 vis += Pie()
 vis += test_style
 
