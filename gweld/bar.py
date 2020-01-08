@@ -25,7 +25,7 @@ class Bar(Chart):
         plot_width = vis.style.width - plot_x[0] - plot_x[1]
         plot_height = vis.style.height - plot_y[0] - plot_y[1]
 
-        y_scale = self._calculate_y_scale(vis.data, 6)
+        y_scale = self._calculate_y_scale(vis.data, vis.style.y_axis_tick_number)
 
         for i in range(len(y_scale)):
             y_pos = plot_y[0] + plot_height - i * plot_height/(len(y_scale)-1)

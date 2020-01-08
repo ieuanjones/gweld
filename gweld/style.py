@@ -18,6 +18,7 @@ class Style:
         self.grid_lines_stroke_width = 1
         
         self.x_axis_interval = 2 # Show every n items on the x axis
+        self.y_axis_tick_number = 7
 
         self.pie_inner_radius = 0.5 # Move out to separate function in future
         self.pie_value_radius = 1.1 # Move out to separate function in future
