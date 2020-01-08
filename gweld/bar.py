@@ -27,6 +27,17 @@ class Bar(Chart):
 
         y_scale = self._calculate_y_scale(vis.data, 6)
 
+        for i in range(len(y_scale)):
+            y_pos = plot_y[0] + plot_height - i * plot_height/(len(y_scale)-1)
+            if vis.style.show_grid_lines:
+                add_tag(tree, 'line', attributes={
+                    'x1': str(plot_x[0]),
+                    'x2': str(plot_x[0] + plot_width),
+                    'y1': str(y_pos),
+                    'y2': str(y_pos),
+                    'class': 'grid_lines'
+                })
+
         width_per_bar = plot_width / len(vis.data)
         bar_width = width_per_bar * vis.style.bar_width
 
@@ -71,8 +82,8 @@ class Bar(Chart):
         })
         
         for i, label in enumerate(y_scale):
-            label_y = plot_y[0] + plot_height - i * plot_height/(len(y_scale)-1)
-            add_text(tree, (plot_x[0]-5, label_y), str(label), vis.style.text_styles['y_axis'])
+            y_pos = plot_y[0] + plot_height - i * plot_height/(len(y_scale)-1)
+            add_text(tree, (plot_x[0]-5, y_pos), str(label), vis.style.text_styles['y_axis'])
 
         return to_string(tree)
 

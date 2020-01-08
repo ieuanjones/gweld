@@ -8,8 +8,17 @@ class Style:
         self.data_colour = '#f00'
         self.data_colours = ['#ed4334','#27ca42','#2546eb','#eadc45','#faab43']
         self.background_colour = '#efefef'
+
         self.axis_font_size = 24
+        self.axis_stroke_colour = '#000'
+        self.axis_stroke_width = '2'
+
+        self.show_grid_lines = True 
+        self.grid_lines_stroke_colour = '#a7a7a7'
+        self.grid_lines_stroke_width = 1
+        
         self.x_axis_interval = 2 # Show every n items on the x axis
+
         self.pie_inner_radius = 0.5 # Move out to separate function in future
         self.pie_value_radius = 1.1 # Move out to separate function in future
 
@@ -49,8 +58,13 @@ class Style:
         }}
         
         .axis {{
-            stroke: black;
-            stroke-width: 2px;
+            stroke: {self.axis_stroke_colour};
+            stroke-width: {self.axis_stroke_width}px;
+        }}
+
+        .grid_lines {{
+            stroke: {self.grid_lines_stroke_colour};
+            stroke-width: {self.grid_lines_stroke_width}px;
         }}
         '''
 
