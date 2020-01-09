@@ -1,4 +1,4 @@
-from gweld.svg_lib import root_tag, add_tag, add_text, to_string
+from gweld.svg_lib import root_tag, add_tag, add_text
 from gweld import Chart
 import math
 
@@ -92,7 +92,7 @@ class Pie(Chart):
             'fill': vis.style.background_colour
         })
 
-        return to_string(tree)
+        return tree
 
     def _calculate_angles(self, data):
         angles = []

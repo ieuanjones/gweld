@@ -1,4 +1,4 @@
-from gweld.svg_lib import root_tag, add_tag, add_text, to_string
+from gweld.svg_lib import root_tag, add_tag, add_text
 from gweld import Chart
 import math
 
@@ -85,7 +85,7 @@ class Bar(Chart):
             y_pos = plot_y[0] + plot_height - i * plot_height/(len(y_scale)-1)
             add_text(tree, (plot_x[0]-5, y_pos), str(label), vis.style.text_styles['y_axis'])
 
-        return to_string(tree)
+        return tree
 
     def _calculate_y_scale(self, data, tick_count=5):
         # Algorithm from: https://stackoverflow.com/a/326746
