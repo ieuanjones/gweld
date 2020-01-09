@@ -27,7 +27,7 @@ class Vis:
         if isinstance(other, Chart):
             return Vis(data=self.data, chart=other, elements=self.elements, style=self.style)
         if isinstance(other, VisElement):
-            return Vis(data=self.data, chart=self.chart, elements=self.elements+[other], style=other)
+            return Vis(data=self.data, chart=self.chart, elements=self.elements+[other], style=self.style)
         if isinstance(other, Style):
             return Vis(data=self.data, chart=self.chart, elements=self.elements, style=other)
         raise TypeError
