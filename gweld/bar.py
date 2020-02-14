@@ -1,4 +1,4 @@
-from gweld.svg_lib import root_tag, add_tag, add_text, to_string
+from gweld.svg_lib import root_tag, add_tag, add_text
 from gweld import Chart
 import math
 
@@ -91,6 +91,10 @@ class Bar(Chart):
         # Algorithm from: https://stackoverflow.com/a/326746
         lower_bound = 0 # No support for negative numbers.... yet
         upper_bound = data.max
+
+        if upper_bound == 0:
+            upper_bound = 1
+
         data_range = upper_bound - lower_bound
         coarse_tick_size = data_range / (tick_count-1)
         magnitude = math.ceil(math.log(coarse_tick_size, 10)) # Yay floating point arithmetic!
