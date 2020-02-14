@@ -5,7 +5,7 @@ def root_tag(width, height):
 
 def add_tag(parent, tag, attributes=None, text=None):
     tag = etree.SubElement(parent, tag, attributes)
-    tag.text = text
+    tag.text = str(text)
     return tag 
 
 def add_text(parent, pos, text, style, class_suffix=''):
