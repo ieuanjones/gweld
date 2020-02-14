@@ -1,4 +1,4 @@
-from gweld.svg_lib import root_tag, add_tag, add_text
+from gweld.svg_lib import root_tag, add_tag, add_text, to_string
 from gweld import Chart
 import math
 
