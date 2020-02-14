@@ -9,7 +9,7 @@ class Bar(Chart):
         add_tag(tree, 'rect', attributes={'x': '0', 'y': '0', 'width': str(vis.style.width), 'height': str(vis.style.height), 'fill': vis.style.background_colour})
 
         if len(vis.data) == 0:
-            return to_string(tree)
+            return tree
 
         # Left, Right
         plot_x = (
