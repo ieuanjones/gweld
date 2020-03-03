@@ -17,7 +17,7 @@ class Style:
         self.grid_lines_stroke_colour = '#a7a7a7'
         self.grid_lines_stroke_width = 1
         
-        self.x_axis_interval = 2 # Show every n items on the x axis
+        self.x_axis_interval = 1 # Show every n items on the x axis
         self.y_axis_tick_number = 7
 
         self.pie_inner_radius = 0.5 # Move out to separate function in future
@@ -29,7 +29,7 @@ class Style:
             'value': TextStyle('value'),
             'circle_value': CircleTextStyle('circle_value')
         }
-        self.show_values = 'limits'
+        self.show_values = 'none'
 
         # L U R D
         self.margin = (0.05, 0.05, 0.05, 0.1)
@@ -56,6 +56,10 @@ class Style:
         css += f'''
         .data_colour {{
             fill: {self.data_colour};
+        }}
+        
+        .line_chart_data_line {{
+            stroke-width: 2px;
         }}
         
         .axis {{
