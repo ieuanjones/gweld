@@ -1,5 +1,5 @@
-from gweld.util_lib import calculate_y_scale, calculate_chart_size, calculate_margins
-from gweld.svg_lib import add_tag, add_text
+from gweld.libs.util_lib import calculate_y_scale, calculate_chart_size, calculate_margins
+from gweld.libs.svg_lib import add_tag, add_text
 from gweld import VisElement
 
 class AxisElement(VisElement):
