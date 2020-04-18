@@ -9,6 +9,9 @@ class DataSet(Data):
 
         return self
 
+    def __len__(self):
+        return max([len(data) for data in self.data])
+
     @property
     def max(self):
         return max([max(data) for data in self.data])

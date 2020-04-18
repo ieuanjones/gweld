@@ -1,89 +1,55 @@
+from gweld.util_lib import calculate_y_scale, calculate_chart_size, calculate_margins
+from gweld.axis_element import AxisElement
+from gweld.bg_element import BGElement
 from gweld.svg_lib import root_tag, add_tag, add_text
 from gweld import Chart
 import math
 
 class Bar(Chart):
-    def plot(self, vis):
-        tree = root_tag(vis.style.width, vis.style.height)
-        add_tag(tree, 'style', text=vis.style.css)
-        add_tag(tree, 'rect', attributes={'x': '0', 'y': '0', 'width': str(vis.style.width), 'height': str(vis.style.height), 'fill': vis.style.background_colour})
+    def init(self):
+        self.elements = [BGElement(), AxisElement()]
 
+    def plot(self, tree, vis):
         if len(vis.data) == 0:
             return tree
 
-        # Left, Right
-        plot_x = (
-            vis.style.width * vis.style.margin[0],
-            vis.style.width * vis.style.margin[2]
-        )
-        # Up, Down
-        plot_y = (
-            vis.style.height * vis.style.margin[1],
-            vis.style.height * vis.style.margin[3]
-        )
+        margins = calculate_margins(vis)
+        size = calculate_chart_size(vis, margins)
 
-        plot_width = vis.style.width - plot_x[0] - plot_x[1]
-        plot_height = vis.style.height - plot_y[0] - plot_y[1]
+        y_scale = calculate_y_scale(vis.data, vis.style.y_axis_tick_number)
 
-        y_scale = self._calculate_y_scale(vis.data, vis.style.y_axis_tick_number)
+        inner_tree = add_tag(tree, 'svg', attributes={
+            'viewBox': f'0 0 {size[0]}, {size[1]}',
+            'x': str(margins[0]),
+            'y': str(margins[1]),
+            'width': str(size[0]),
+            'height': str(size[1])
+        })
 
-        for i in range(len(y_scale)):
-            y_pos = plot_y[0] + plot_height - i * plot_height/(len(y_scale)-1)
-            if vis.style.show_grid_lines:
-                add_tag(tree, 'line', attributes={
-                    'x1': str(plot_x[0]),
-                    'x2': str(plot_x[0] + plot_width),
-                    'y1': str(y_pos),
-                    'y2': str(y_pos),
-                    'class': 'grid_lines'
-                })
-
-        width_per_bar = plot_width / len(vis.data)
+        width_per_bar = size[0] / len(vis.data)
         bar_width = width_per_bar * vis.style.bar_width
 
         for i, item in enumerate(vis.data):
-            height = (item / y_scale[-1]) * plot_height
-            centre_x = plot_x[0] + i * width_per_bar + width_per_bar/2
+            height = (item / y_scale[-1]) * size[1]
+            centre_x = i * width_per_bar + width_per_bar/2
 
-            add_tag(tree, 'rect', attributes={
+            add_tag(inner_tree, 'rect', attributes={
                 'width': str(bar_width),
                 'height': str(height),
                 'x': str(centre_x - bar_width/2),
-                'y': str(plot_y[0] + plot_height - height),
+                'y': str(size[1] - height),
                 'class': 'data_colour'
             })
 
             if vis.style.show_values == 'all' or (vis.style.show_values == 'limits' and
                     (item == vis.data.max or item == vis.data.min)):
-                label_y = plot_y[0] + plot_height - height - vis.style.text_styles["value"].size/2
-                add_text(tree, (centre_x, label_y), str(item), vis.style.text_styles['value'])
+                label_y = size[1] - height - vis.style.text_styles["value"].size/2
+                add_text(tree, (margins[0] + centre_x, margins[1] + label_y), str(item), vis.style.text_styles['value'])
 
             if vis.data.labels:
                 if not i % vis.style.x_axis_interval:
-                    label_y = plot_y[0] + plot_height + vis.style.text_styles["x_axis"].size/2
-                    add_text(tree, (centre_x, label_y), str(vis.data.labels[i]), vis.style.text_styles['x_axis'])
-
-        # Axes
-        
-        add_tag(tree, 'line', attributes={
-            'x1': str(plot_x[0]),
-            'x2': str(plot_x[0]),
-            'y1': str(plot_y[0] + plot_height),
-            'y2': str(plot_y[0]),
-            'class': 'axis'
-        })
-        
-        add_tag(tree, 'line', attributes={
-            'x1': str(plot_x[0]),
-            'x2': str(plot_x[0] + plot_width),
-            'y1': str(plot_y[0] + plot_height),
-            'y2': str(plot_y[0] + plot_height),
-            'class': 'axis'
-        })
-        
-        for i, label in enumerate(y_scale):
-            y_pos = plot_y[0] + plot_height - i * plot_height/(len(y_scale)-1)
-            add_text(tree, (plot_x[0]-5, y_pos), str(label), vis.style.text_styles['y_axis'])
+                    label_y = size[1] + vis.style.text_styles["x_axis"].size/2
+                    add_text(tree, (margins[0] + centre_x, margins[1] + label_y), str(vis.data.labels[i]), vis.style.text_styles['x_axis'])
 
         return tree
 
