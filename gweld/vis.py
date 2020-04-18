@@ -6,7 +6,7 @@ Module containing the core visualisation object.
 """
 
 from gweld import Data, Chart, Bar, VisElement, Style
-from gweld.svg_lib import add_tag, root_tag, to_string
+from gweld.libs.svg_lib import add_tag, root_tag, to_string
 
 class Vis:
     """

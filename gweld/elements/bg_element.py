@@ -1,4 +1,4 @@
-from gweld.svg_lib import add_tag
+from gweld.libs.svg_lib import add_tag
 from gweld import VisElement
 
 class BGElement(VisElement):

@@ -1,6 +1,5 @@
-from gweld.bg_element import BGElement
-from gweld.svg_lib import root_tag, add_tag, add_text
-from gweld import Chart
+from gweld.libs.svg_lib import root_tag, add_tag, add_text
+from gweld import Chart, BGElement
 import math
 
 class Pie(Chart):

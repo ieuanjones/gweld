@@ -1,8 +1,6 @@
-from gweld.util_lib import calculate_y_scale, calculate_chart_size, calculate_margins
-from gweld.axis_element import AxisElement
-from gweld.bg_element import BGElement
-from gweld.svg_lib import root_tag, add_tag, add_text
-from gweld import Chart
+from gweld.libs.util_lib import calculate_y_scale, calculate_chart_size, calculate_margins
+from gweld.libs.svg_lib import root_tag, add_tag, add_text
+from gweld import Chart, AxisElement, BGElement
 import math
 
 class Bar(Chart):
