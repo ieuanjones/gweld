@@ -1,13 +1,13 @@
+from gweld.bg_element import BGElement
 from gweld.svg_lib import root_tag, add_tag, add_text
 from gweld import Chart
 import math
 
 class Pie(Chart):
-    def plot(self, vis):
-        tree = root_tag(vis.style.width, vis.style.height)
-        add_tag(tree, 'style', text=vis.style.css)
-        add_tag(tree, 'rect', attributes={'x': '0', 'y': '0', 'width': str(vis.style.width), 'height': str(vis.style.height), 'fill': vis.style.background_colour})
+    def init(self):
+        self.elements = [BGElement()]
 
+    def plot(self, tree, vis):
         if len(vis.data) == 0:
             return tree
 
@@ -56,7 +56,7 @@ class Pie(Chart):
 
                 add_tag(tree, 'path', attributes={
                     'd': f'M{centre[0]},{centre[1]} L{old_x},{old_y} A{radius},{radius} 0 {big},1 {x},{y} Z',
-                    'fill': vis.style.data_colours[i%len(vis.data)]
+                    'fill': vis.style.data_colours[(i%len(vis.data)) % len(vis.style.data_colours)]
                 }, text=str((angles[i], angle)))
 
             angle = 0

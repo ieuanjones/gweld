@@ -1,6 +1,6 @@
 class Data:
     def __init__(self, data=[], labels=[]):
-        self.data = data
+        self.data = list(data)
         self.labels = labels
 
     def __repr__(self):
@@ -14,8 +14,14 @@ class Data:
 
     @property
     def max(self):
-        return max(self.data)
+        if len(self.data):
+            return max(self.data)
+        else:
+            return 1
 
     @property
     def min(self):
-        return min(self.data)
+        if len(self.data):
+            return min(self.data)
+        else:
+            return 0

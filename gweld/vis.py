@@ -6,17 +6,22 @@ Module containing the core visualisation object.
 """
 
 from gweld import Data, Chart, Bar, VisElement, Style
-from gweld.svg_lib import to_string
+from gweld.svg_lib import add_tag, root_tag, to_string
 
 class Vis:
     """
     A visualisation object. The core object worked with to create visualisations.
     """
     def __init__(self, data=Data(), chart=Bar(), elements=[], style=Style()):
+        self.init()
+
         self.data = data
         self.chart = chart
-        self.elements = elements
+        self.elements += elements
         self.style = style
+
+    def init(self):
+        self.elements = []
 
     def __repr__(self):
         return f'Chart(data={self.data!r}, chart={self.chart!r}, style={self.style!r})'
@@ -33,7 +38,13 @@ class Vis:
         raise TypeError
 
     def plot(self):
-        tree = self.chart.plot(self)
+        tree = root_tag(self.style.width, self.style.height)
+        add_tag(tree, 'style', text=self.style.css)
+
+        for element in self.chart.elements:
+            element.plot(tree, self)
+        
+        self.chart.plot(tree, self)
 
         for element in self.elements:
             element.plot(tree, self)
